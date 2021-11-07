@@ -1,11 +1,19 @@
 package com.sharebikepath.entities;
 
+
 public class Point {
 
-    private long latitude;
-    private long longitude;
 
-    public long getLatitude() {
+//    TODO change how it is stored
+    private double latitude;
+    private double longitude;
+
+    public Point(double latitude, double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
         return latitude;
     }
 
@@ -14,7 +22,7 @@ public class Point {
         return this;
     }
 
-    public long getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
