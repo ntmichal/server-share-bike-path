@@ -6,6 +6,6 @@ import java.util.UUID;
 
 public interface RepositoryInterface {
 
-    public Meeting getMeetingByUUID(UUID uuid);
-
+    Meeting getByUUID(UUID uuid);
+    UUID save(Meeting meeting);
 }
