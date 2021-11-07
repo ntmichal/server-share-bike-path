@@ -23,7 +23,7 @@ public class Controller {
     public Meeting getRoomID(@RequestParam String eventId){
         UUID meetingId = UUID.fromString(eventId);
 
-        return repositoryInterface.getMeetingByUUID(meetingId);
+        return repositoryInterface.getByUUID(meetingId);
     }
 
 
