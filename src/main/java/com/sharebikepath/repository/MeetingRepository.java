@@ -34,9 +34,14 @@ public class MeetingRepository implements RepositoryInterface {
 
     @Override
     public UUID save(Meeting meeting) {
+        Meeting savingMeeting = new Meeting();
         UUID randomUUID = UUID.randomUUID();
-        meeting.setMeetingId(randomUUID);
-        meetingHashMap.put(randomUUID, meeting);
+        savingMeeting.setMeetingId(randomUUID);
+        savingMeeting.setName(meeting.getName());
+        savingMeeting.setPoints(meeting.getPoints());
+        meetingHashMap.put(randomUUID, savingMeeting);
+
         return randomUUID;
     }
+
 }

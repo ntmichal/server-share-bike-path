@@ -35,6 +35,11 @@ public class MeetingBuilder{
             return this;
         }
 
+        public MeetingBuilder setPoints(List<Point> pointList){
+            pointList = pointList;
+            return this;
+        }
+
         public Meeting build(){
             Meeting meeting = new Meeting();
             meeting.setMeetingId(id);
