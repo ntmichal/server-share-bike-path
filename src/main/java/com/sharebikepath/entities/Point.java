@@ -9,12 +9,12 @@ public class Point {
     private double latitude;
     private double longitude;
 
-    public Point(double latitude, double longitude) {
+    public Point(double longitude, double latitude) {
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    public Point(Long id, double latitude, double longitude) {
+    public Point(Long id,double longitude, double latitude) {
         this.id = id;
         this.latitude = latitude;
         this.longitude = longitude;

@@ -19,10 +19,10 @@ public class MeetingRepository implements RepositoryInterface {
         Meeting meeting = Meeting.builder()
                 .setID(uuidTest)
                 .setName("Test path")
-                .addPoint(new Point(1l,52.237360321604534,20.897770194467046))
-                .addPoint(new Point(2l,52.27624775756698, 20.99537729362339))
-                .addPoint(new Point(3l,52.213822451849225, 21.019218111226085))
-                .addPoint(new Point(4l, 52.15055164427725, 20.97390554664344))
+                .addPoint(new Point(1l,20.897770194467046,52.237360321604534))
+                .addPoint(new Point(2l,20.99537729362339, 52.27624775756698))
+                .addPoint(new Point(3l,21.019218111226085, 52.213822451849225))
+                .addPoint(new Point(4l, 20.97390554664344, 52.15055164427725))
                 .build();
         meetingHashMap.put(uuidTest, meeting);
     }
