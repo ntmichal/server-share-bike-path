@@ -24,22 +24,27 @@ public class Coordinates {
         coordinates.add(coordinate);
     }
 
-    public String toJSONString() throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
+    public String toJSONString(){
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
 
-        ArrayNode coordinatesJSON = objectMapper.createArrayNode();
+            ArrayNode coordinatesJSON = objectMapper.createArrayNode();
 
-        for (int i = 0; i < coordinates.size(); i++) {
-            coordinatesJSON.add(objectMapper
-                    .createArrayNode()
-                    .add(coordinates.get(i).getLongitude())
-                    .add(coordinates.get(i).getLatitude()));
+            for (int i = 0; i < coordinates.size(); i++) {
+                coordinatesJSON.add(objectMapper
+                        .createArrayNode()
+                        .add(coordinates.get(i).getLongitude())
+                        .add(coordinates.get(i).getLatitude()));
+            }
+
+            ObjectNode jsonNode = objectMapper.createObjectNode();
+            jsonNode.putPOJO("coordinates",coordinatesJSON);
+            jsonNode.putPOJO("instructions","false");
+
+            return objectMapper.writeValueAsString(jsonNode);
+        }catch (JsonProcessingException exception){
+            throw new RuntimeException(exception.getMessage());
         }
 
-        ObjectNode jsonNode = objectMapper.createObjectNode();
-        jsonNode.put("coordinates",coordinatesJSON);
-
-
-        return objectMapper.writeValueAsString(jsonNode);
     }
 }
