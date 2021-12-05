@@ -7,8 +7,10 @@ import java.util.List;
 
 public class MeetingDTO {
 
+    private String id;
     private String name;
     private List<PointDTO> points;
+
 
     public String getName() {
         return name;
@@ -16,6 +18,14 @@ public class MeetingDTO {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public List<PointDTO> getPoints() {

@@ -3,8 +3,13 @@ package com.sharebikepath.dto;
 import com.sharebikepath.entities.Point;
 
 public class PointDTO {
+
+    private Long id;
     private double latitude;
     private double longitude;
+
+    public PointDTO() {
+    }
 
     public PointDTO(double latitude, double longitude) {
         this.latitude = latitude;
@@ -27,6 +32,13 @@ public class PointDTO {
         this.longitude = longitude;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Override
     public boolean equals(Object obj) {
@@ -42,6 +54,10 @@ public class PointDTO {
 
     }
     public static PointDTO PointDTOFromPoint(Point point){
-        return new PointDTO(point.getLatitude(), point.getLongitude());
+        PointDTO pointDTO = new PointDTO();
+        pointDTO.setId(point.getId());
+        pointDTO.setLatitude(point.getLatitude());
+        pointDTO.setLongitude(point.getLongitude());
+        return pointDTO;
     }
 }

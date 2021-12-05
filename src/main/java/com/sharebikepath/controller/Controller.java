@@ -25,11 +25,11 @@ public class Controller {
     }
 
     @GetMapping(path = "get")
-    public MeetingDTO getRoomID(@RequestParam String eventId){
+    public MeetingDTO getMeeting(@RequestParam String eventId){
         UUID meetingId = UUID.fromString(eventId);
-
         Meeting meeting = repositoryInterface.getByUUID(meetingId);
         return MeetingDTO.builder()
+                .setID(meeting.getMeetingId().toString())
                 .setName(meeting.getName())
                 .setPoints(meeting.getPoints().stream().map(PointDTO::PointDTOFromPoint).collect(Collectors.toList()))
                 .build();
@@ -42,6 +42,7 @@ public class Controller {
                 .setName(meetingDTO.getName())
                 .setPoints(meetingDTO.getPoints().stream().map(Point::PointFromPointDTO).collect(Collectors.toList()))
                 .build();
+
         repositoryInterface.save(meeting);
     }
 }

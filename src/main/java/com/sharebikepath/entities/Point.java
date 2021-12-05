@@ -14,6 +14,12 @@ public class Point {
         this.longitude = longitude;
     }
 
+    public Point(Long id, double latitude, double longitude) {
+        this.id = id;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     public Long getId() {
         return id;
     }

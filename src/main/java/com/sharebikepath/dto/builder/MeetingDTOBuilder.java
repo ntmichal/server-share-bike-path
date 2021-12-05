@@ -9,15 +9,15 @@ import java.util.UUID;
 
 public class MeetingDTOBuilder{
 
-    private UUID id;
+    private String id;
     private String name;
     private List<PointDTO> pointList;
 
     public MeetingDTOBuilder() {
     }
 
-    public MeetingDTOBuilder setID(UUID uuid){
-        this.id = uuid;
+    public MeetingDTOBuilder setID(String id){
+        this.id = id;
         return this;
     }
     public MeetingDTOBuilder setName(String name){
@@ -42,6 +42,7 @@ public class MeetingDTOBuilder{
 
     public MeetingDTO build(){
         MeetingDTO meeting = new MeetingDTO();
+        meeting.setId(id);
         meeting.setName(name);
         meeting.setPoints(pointList);
         return meeting;
