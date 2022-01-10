@@ -47,6 +47,6 @@ public class Point {
     }
 
     public static Point PointFromPointDTO(PointDTO pointDTO){
-        return new Point(pointDTO.getLatitude(), pointDTO.getLongitude());
+        return new Point(pointDTO.getLongitude(), pointDTO.getLatitude());
     }
 }

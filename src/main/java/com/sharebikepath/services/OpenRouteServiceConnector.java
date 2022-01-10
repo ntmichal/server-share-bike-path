@@ -40,7 +40,7 @@ public class OpenRouteServiceConnector {
         Coordinates coordinates = new Coordinates();
         List<Coordinate> coordinatesList = pointList
                 .stream()
-                .map(point -> { return new Coordinate(point.getLongitude(),point.getLongitude());})
+                .map(point -> { return new Coordinate(point.getLongitude(),point.getLatitude());})
                 .collect(Collectors.toList());
 
         coordinates.setCoordinates(coordinatesList);
