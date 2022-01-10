@@ -6,8 +6,11 @@ import com.sharebikepath.dto.PointDTO;
 import com.sharebikepath.entities.Meeting;
 import com.sharebikepath.entities.Point;
 import com.sharebikepath.repository.interfaces.RepositoryInterface;
+import com.sharebikepath.services.OpenRouteServiceConnector;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -16,12 +19,13 @@ import java.util.stream.Collectors;
 public class Controller {
 
 
-//    "39f913e2-b8ce-469f-b2cb-13a313163dd8"
-
     private RepositoryInterface repositoryInterface;
+    private OpenRouteServiceConnector openRouteServiceConnector;
 
-    public Controller(RepositoryInterface repositoryInterface) {
+    public Controller(RepositoryInterface repositoryInterface,
+    OpenRouteServiceConnector openRouteServiceConnector) {
         this.repositoryInterface = repositoryInterface;
+        this.openRouteServiceConnector = openRouteServiceConnector;
     }
 
     @GetMapping(path = "get")
@@ -44,5 +48,15 @@ public class Controller {
                 .build();
 
         repositoryInterface.save(meeting);
+    }
+
+    @GetMapping(path="route")
+    public Object getRoute(@RequestBody List<PointDTO> pointDTOList){
+
+        List<PointDTO> pointDTOS = pointDTOList;
+        List<Point> pointList = pointDTOList.stream().map(Point::PointFromPointDTO).collect(Collectors.toList());
+        ResponseEntity responseEntity = openRouteServiceConnector.getRoute(pointList);
+
+        return responseEntity.getBody();
     }
 }
