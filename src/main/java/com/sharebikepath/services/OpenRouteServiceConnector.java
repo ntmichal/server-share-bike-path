@@ -27,29 +27,18 @@ public class OpenRouteServiceConnector {
     private String pathProfile = "cycling-regular";
     private String responseType = "geojson";
 
-    public ResponseEntity getRoute(List<Point> pointList){
-        String coordinates = convertToCoordinates(pointList)
-                .toJSONString();
+    public ResponseEntity getRoute(Coordinates coordinates){
 
-        ResponseEntity routeRequest = makeRequest(coordinates);
+        ResponseEntity routeRequest = makeRequest(coordinates.toJSONString());
 
         return routeRequest;
     }
 
-    private Coordinates convertToCoordinates(List<Point> pointList){
-        Coordinates coordinates = new Coordinates();
-        List<Coordinate> coordinatesList = pointList
-                .stream()
-                .map(point -> { return new Coordinate(point.getLongitude(),point.getLatitude());})
-                .collect(Collectors.toList());
 
-        coordinates.setCoordinates(coordinatesList);
-        return coordinates;
-    }
     private ResponseEntity makeRequest(String jsonCoordinates){
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(HttpHeaders.AUTHORIZATION,key);
-        httpHeaders.add(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+        httpHeaders.add(HttpHeaders.CONTENT_TYPE, "application/json; charset=utf-8");
         httpHeaders.add(HttpHeaders.ACCEPT, "application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8");
 
         HttpEntity httpEntity = new HttpEntity(jsonCoordinates, httpHeaders);
@@ -61,7 +50,7 @@ public class OpenRouteServiceConnector {
     }
 
     private String makeUrl(){
-        return URL + pathProfile + "/" + responseType;
+        return URL + pathProfile;
     }
 
 }

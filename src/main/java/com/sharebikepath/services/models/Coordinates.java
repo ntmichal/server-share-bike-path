@@ -10,17 +10,17 @@ import java.util.List;
 
 public class Coordinates {
 
-    private List<Coordinate> coordinates = new ArrayList<>();
+    private List<double[]> coordinates = new ArrayList<>();
     
-    public List<Coordinate> getCoordinates() {
+    public List<double[]> getCoordinates() {
         return coordinates;
     }
 
-    public void setCoordinates(List<Coordinate> coordinates) {
+    public void setCoordinates(List<double[]> coordinates) {
         this.coordinates = coordinates;
     }
     
-    public void addPoint(Coordinate coordinate){
+    public void addPoint(double[] coordinate){
         coordinates.add(coordinate);
     }
 
@@ -33,13 +33,13 @@ public class Coordinates {
             for (int i = 0; i < coordinates.size(); i++) {
                 coordinatesJSON.add(objectMapper
                         .createArrayNode()
-                        .add(coordinates.get(i).getLongitude())
-                        .add(coordinates.get(i).getLatitude()));
+                        .add(coordinates.get(i)[0])
+                        .add(coordinates.get(i)[1]));
             }
 
             ObjectNode jsonNode = objectMapper.createObjectNode();
             jsonNode.putPOJO("coordinates",coordinatesJSON);
-            jsonNode.putPOJO("instructions","false");
+//            jsonNode.putPOJO("instructions","false");
 
             return objectMapper.writeValueAsString(jsonNode);
         }catch (JsonProcessingException exception){

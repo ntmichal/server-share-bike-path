@@ -7,15 +7,18 @@ import com.sharebikepath.entities.Meeting;
 import com.sharebikepath.entities.Point;
 import com.sharebikepath.repository.interfaces.RepositoryInterface;
 import com.sharebikepath.services.OpenRouteServiceConnector;
+import com.sharebikepath.services.models.Coordinates;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "meeting")
+@CrossOrigin(origins = "http://localhost:4200/**", allowedHeaders = "*")
 public class Controller {
 
 
@@ -50,13 +53,13 @@ public class Controller {
         repositoryInterface.save(meeting);
     }
 
-    @GetMapping(path="route")
-    public Object getRoute(@RequestBody List<PointDTO> pointDTOList){
+    @PostMapping(path="route")
+    public Object getRoute(@RequestBody Coordinates coordinates){
 
-        List<PointDTO> pointDTOS = pointDTOList;
-        List<Point> pointList = pointDTOList.stream().map(Point::PointFromPointDTO).collect(Collectors.toList());
-        ResponseEntity responseEntity = openRouteServiceConnector.getRoute(pointList);
+        ResponseEntity responseEntity = openRouteServiceConnector.getRoute(coordinates);
 
         return responseEntity.getBody();
     }
+
+
 }

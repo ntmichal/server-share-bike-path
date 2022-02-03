@@ -2,6 +2,8 @@ package com.sharebikepath.services;
 
 import com.sharebikepath.entities.Meeting;
 import com.sharebikepath.entities.Point;
+import com.sharebikepath.services.models.Coordinate;
+import com.sharebikepath.services.models.Coordinates;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,14 +24,12 @@ class OpenRouteServiceConnectorTest {
     @Test
     void test_is_coordinates_sends_to_api(){
 
-        List<Point> pointList = Meeting
-                .builder()
-                .addPoint(new Point(8.681495,49.41461))
-                .addPoint(new Point(8.686507,49.41943))
-                .addPoint(new Point(8.687872, 49.420318))
-                .build().getPoints();
+        Coordinates coordinates = new Coordinates();
+        coordinates.addPoint(new double[]{20.993828, 52.242642});
+        coordinates.addPoint(new double[]{20.988635,52.225038});
 
-        ResponseEntity responseEntity = this.openRouteServiceConnector.getRoute(pointList);
+
+        ResponseEntity responseEntity = this.openRouteServiceConnector.getRoute(coordinates);
 
         assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
 
