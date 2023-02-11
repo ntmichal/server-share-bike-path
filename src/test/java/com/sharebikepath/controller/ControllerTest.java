@@ -48,7 +48,7 @@ class ControllerTest {
 
         String pointsJSON = objectMapper.writeValueAsString(coordinates);
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/meeting/route")
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/api/meeting/route")
                         .content(pointsJSON)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())

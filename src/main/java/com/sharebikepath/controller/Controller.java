@@ -17,7 +17,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(path = "meeting")
+@RequestMapping(path = "/api/meeting")
 @CrossOrigin(origins = "http://localhost:4200/**", allowedHeaders = "*")
 public class Controller {
 
