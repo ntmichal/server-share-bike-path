@@ -36,7 +36,7 @@ public class MeetingBuilder{
         }
 
         public MeetingBuilder setPoints(List<Point> pointList){
-            pointList = pointList;
+            this.pointList = pointList;
             return this;
         }
 

@@ -32,7 +32,7 @@ public class Point {
         return latitude;
     }
 
-    public Point setLatitude(long latitude) {
+    public Point setLatitude(double latitude) {
         this.latitude = latitude;
         return this;
     }
@@ -41,12 +41,43 @@ public class Point {
         return longitude;
     }
 
-    public Point setLongitude(long longitude) {
+    public Point setLongitude(double longitude) {
         this.longitude = longitude;
+        return this;
+    }
+
+    public Point updateLonLat(Point point){
+        this.setLatitude(point.getLatitude());
+        this.setLongitude(point.getLongitude());
         return this;
     }
 
     public static Point PointFromPointDTO(PointDTO pointDTO){
         return new Point(pointDTO.getLongitude(), pointDTO.getLatitude());
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Point point = (Point) o;
+
+        if (Double.compare(point.latitude, latitude) != 0) return false;
+        if (Double.compare(point.longitude, longitude) != 0) return false;
+        return id != null ? id.equals(point.id) : point.id == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = id != null ? id.hashCode() : 0;
+        temp = Double.doubleToLongBits(latitude);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(longitude);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 }
